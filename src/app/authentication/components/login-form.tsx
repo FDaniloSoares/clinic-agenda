@@ -23,8 +23,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const registerSchema = z.object({
-  name: z.string().trim().min(1, { message: "Nome é obrigatório" }),
+const loginSchema = z.object({
   email: z.string().trim().email({ message: "Email inválido" }),
   password: z
     .string()
@@ -32,17 +31,16 @@ const registerSchema = z.object({
     .min(8, { message: "Senha deve ter pelo menos 8 caracteres" }),
 });
 
-const SignUpForm = () => {
-  const registerForm = useForm<z.infer<typeof registerSchema>>({
-    resolver: zodResolver(registerSchema),
+const LoginForm = () => {
+  const registerForm = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
-      name: "",
       email: "",
       password: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof registerSchema>) {
+  function onSubmit(values: z.infer<typeof loginSchema>) {
     console.log(values);
   }
 
@@ -54,23 +52,10 @@ const SignUpForm = () => {
           className="space-y-8"
         >
           <CardHeader>
-            <CardTitle>Criar conta</CardTitle>
-            <CardDescription>Crie sua conta para continuar</CardDescription>
+            <CardTitle>Login</CardTitle>
+            <CardDescription>Faça login para continuar</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <FormField
-              control={registerForm.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nome</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Digite seu nome" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={registerForm.control}
               name="email"
@@ -104,7 +89,7 @@ const SignUpForm = () => {
           </CardContent>
           <CardFooter>
             <Button className="w-full" type="submit">
-              Criar conta
+              Entrar
             </Button>
           </CardFooter>
         </form>
@@ -113,4 +98,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default LoginForm;
