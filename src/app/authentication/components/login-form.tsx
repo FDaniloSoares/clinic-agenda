@@ -1,7 +1,10 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -22,7 +25,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
+import { authClient } from "@/lib/auth-client";
 const loginSchema = z.object({
   email: z.string().trim().email({ message: "Email inválido" }),
   password: z
@@ -32,7 +35,9 @@ const loginSchema = z.object({
 });
 
 const LoginForm = () => {
-  const registerForm = useForm<z.infer<typeof loginSchema>>({
+  const router = useRouter();
+
+  const loginForm = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
@@ -40,24 +45,34 @@ const LoginForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof loginSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof loginSchema>) {
+    await authClient.signIn.email(
+      {
+        email: values.email,
+        password: values.password,
+      },
+      {
+        onSuccess: () => {
+          router.push("/dashboard");
+        },
+        onError: () => {
+          toast.error("Email ou senha inválidos.");
+        },
+      },
+    );
   }
 
   return (
     <Card>
-      <Form {...registerForm}>
-        <form
-          onSubmit={registerForm.handleSubmit(onSubmit)}
-          className="space-y-8"
-        >
+      <Form {...loginForm}>
+        <form onSubmit={loginForm.handleSubmit(onSubmit)} className="space-y-8">
           <CardHeader>
             <CardTitle>Login</CardTitle>
             <CardDescription>Faça login para continuar</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <FormField
-              control={registerForm.control}
+              control={loginForm.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
@@ -70,7 +85,7 @@ const LoginForm = () => {
               )}
             />
             <FormField
-              control={registerForm.control}
+              control={loginForm.control}
               name="password"
               render={({ field }) => (
                 <FormItem>
@@ -88,8 +103,16 @@ const LoginForm = () => {
             />
           </CardContent>
           <CardFooter>
-            <Button className="w-full" type="submit">
-              Entrar
+            <Button
+              className="w-full"
+              type="submit"
+              disabled={loginForm.formState.isSubmitting}
+            >
+              {loginForm.formState.isSubmitting ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                "Entrar"
+              )}
             </Button>
           </CardFooter>
         </form>

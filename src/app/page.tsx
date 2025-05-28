@@ -1,23 +1,15 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+"use client";
 
-import LoginForm from "./authentication/components/login-form";
-import SignUpForm from "./authentication/components/sign-up-form";
+import { useRouter } from "next/navigation";
+
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
-  return (
-    <div className="flex h-screen w-screen items-center justify-center">
-      <Tabs defaultValue="login" className="w-[400px]">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="login">Login</TabsTrigger>
-          <TabsTrigger value="register">Criar conta</TabsTrigger>
-        </TabsList>
-        <TabsContent value="login">
-          <LoginForm />
-        </TabsContent>
-        <TabsContent value="register">
-          <SignUpForm />
-        </TabsContent>
-      </Tabs>
-    </div>
-  );
+  const router = useRouter();
+
+  const redirectToAuthentication = () => {
+    router.push("/authentication");
+  };
+
+  return <Button onClick={redirectToAuthentication}>Bootcamp!</Button>;
 }
