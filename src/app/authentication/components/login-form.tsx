@@ -53,6 +53,7 @@ const LoginForm = () => {
       },
       {
         onSuccess: () => {
+          toast.success("Login realizado com sucesso.");
           router.push("/dashboard");
         },
         onError: () => {
