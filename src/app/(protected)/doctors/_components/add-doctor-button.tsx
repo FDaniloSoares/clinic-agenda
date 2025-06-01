@@ -9,7 +9,7 @@ import { Dialog } from "@/components/ui/dialog";
 import UpsertDoctorForm from "./upsert-doctor-form";
 
 export const AddDoctorButton = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
