@@ -77,7 +77,7 @@ export function UpsertPatientForm({ isOpen, onSuccess, defaultValues }: Props) {
     <>
       <DialogHeader>
         <DialogTitle>
-          {defaultValues ? "Editar paciente" : "Adicionar paciente"}
+          {defaultValues ? defaultValues?.name : "Adicionar paciente"}
         </DialogTitle>
         <DialogDescription>
           {defaultValues
