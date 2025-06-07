@@ -293,8 +293,13 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
                     </FormControl>
                     <SelectContent>
                       {availableTimes?.data?.map((time) => (
-                        <SelectItem key={time.value} value={time.value}>
+                        <SelectItem
+                          key={time.value}
+                          value={time.value}
+                          disabled={!time?.isAvailable}
+                        >
                           {time.value.split(":")[0]}:{time.value.split(":")[1]}
+                          {!time?.isAvailable && " Indisponível"}
                         </SelectItem>
                       ))}
                     </SelectContent>
