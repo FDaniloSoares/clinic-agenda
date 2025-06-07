@@ -11,5 +11,5 @@ export default function Home() {
     router.push("/authentication");
   };
 
-  return <Button onClick={redirectToAuthentication}>Bootcamp!</Button>;
+  return <Button onClick={redirectToAuthentication}>Iniciar</Button>;
 }
