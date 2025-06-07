@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import dayjs from "dayjs";
 import { CalendarIcon } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useEffect, useState } from "react";
@@ -97,6 +98,23 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
 
   const onSubmit = (values: FormValues) => {
     execute(values);
+  };
+
+  const isDateAvalable = (date: Date) => {
+    const selectedDoctor = doctors.find(
+      (doctor) => doctor.id === form.watch("doctorId"),
+    );
+
+    if (!selectedDoctor) {
+      return false;
+    }
+
+    const dayOfWeek = dayjs(date).day();
+
+    return (
+      dayOfWeek >= selectedDoctor.availableFromWeekday &&
+      dayOfWeek <= selectedDoctor.availableToWeekday
+    );
   };
 
   useEffect(() => {
@@ -264,7 +282,9 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
                           field.onChange(date);
                           setDatePickerOpen(false);
                         }}
-                        disabled={(date) => date < new Date()}
+                        disabled={(date) =>
+                          date < new Date() || !isDateAvalable(date)
+                        }
                         locale={ptBR}
                         initialFocus
                       />
