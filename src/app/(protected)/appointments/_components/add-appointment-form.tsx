@@ -138,6 +138,7 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
         date: form.watch("date"),
       });
     },
+    enabled: !!form.watch("date") && !!form.watch("doctorId"),
   });
 
   return (

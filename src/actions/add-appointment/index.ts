@@ -9,6 +9,8 @@ import { appointmentsTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 import { actionClient } from "@/lib/safe-action";
 
+import { getAvailableTimes } from "../get-available-times";
+
 const schema = z.object({
   patientId: z.string({
     required_error: "Selecione um paciente",
@@ -40,6 +42,19 @@ export const addAppointment = actionClient
 
     if (!session?.user?.clinic) {
       throw new Error("No clinic selected");
+    }
+
+    const availableTimes = await getAvailableTimes({
+      doctorId: data.doctorId,
+      date: data.date,
+    });
+
+    const isTimeAvailable = availableTimes?.data?.some(
+      (time) => time.value === data.horario && time.isAvailable,
+    );
+
+    if (!isTimeAvailable) {
+      throw new Error("Horário indisponível");
     }
 
     // Combine date and time
