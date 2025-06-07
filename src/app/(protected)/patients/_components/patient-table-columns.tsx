@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { pacientsTable } from "@/db/schema";
 
-import { PatientsTableActions } from "./table-actions";
+import { PatientsTableActions } from "./patient-table-actions";
 
 type Patient = typeof pacientsTable.$inferSelect;
 

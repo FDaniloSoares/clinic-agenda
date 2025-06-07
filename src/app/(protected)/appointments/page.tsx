@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
+import { DataTable } from "@/components/ui/data-table";
 import {
   PageActions,
   PageContainer,
@@ -14,10 +15,11 @@ import {
   PageTitle,
 } from "@/components/ui/page-container";
 import { db } from "@/db";
-import { doctorsTable, pacientsTable } from "@/db/schema";
+import { appointmentsTable, doctorsTable, pacientsTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
-import { UpsertAppointmentForm } from "./_components/upsert-appointment-form";
+import { AddAppointmentForm } from "./_components/add-appointment-form";
+import { appointmentsTableColumns } from "./_components/appointment-columns";
 
 export default async function AppointmentsPage() {
   const session = await auth.api.getSession({
@@ -40,6 +42,14 @@ export default async function AppointmentsPage() {
     where: eq(pacientsTable.clinicId, session.user.clinic.id),
   });
 
+  const appointments = await db.query.appointmentsTable.findMany({
+    where: eq(appointmentsTable.clinicId, session.user.clinic.id),
+    with: {
+      doctor: true,
+      patient: true,
+    },
+  });
+
   return (
     <PageContainer>
       <PageHeader>
@@ -48,15 +58,17 @@ export default async function AppointmentsPage() {
           <PageDescription>Gerencie os agendamentos da clínica</PageDescription>
         </PageHeaderContent>
         <PageActions>
-          <UpsertAppointmentForm doctors={doctors} patients={patients}>
+          <AddAppointmentForm doctors={doctors} patients={patients}>
             <Button>
               <Plus className="mr-2 h-4 w-4" />
               Novo agendamento
             </Button>
-          </UpsertAppointmentForm>
+          </AddAppointmentForm>
         </PageActions>
       </PageHeader>
-      <PageContent>aqui</PageContent>
+      <PageContent>
+        <DataTable columns={appointmentsTableColumns} data={appointments} />
+      </PageContent>
     </PageContainer>
   );
 }

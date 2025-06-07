@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { z } from "zod";
 
@@ -21,9 +22,12 @@ const schema = z.object({
   date: z.date({
     required_error: "Selecione uma data",
   }),
+  horario: z.string({
+    required_error: "Selecione um horário",
+  }),
 });
 
-export const upsertAppointment = actionClient
+export const addAppointment = actionClient
   .schema(schema)
   .action(async ({ parsedInput: data }) => {
     const session = await auth.api.getSession({
@@ -38,16 +42,26 @@ export const upsertAppointment = actionClient
       throw new Error("No clinic selected");
     }
 
+    // Combine date and time
+    const [hours, minutes] = data.horario.split(":");
+    const appointmentDate = new Date(data.date);
+    appointmentDate.setHours(parseInt(hours, 10));
+    appointmentDate.setMinutes(parseInt(minutes, 10));
+    appointmentDate.setSeconds(0);
+    appointmentDate.setMilliseconds(0);
+
     const appointment = await db
       .insert(appointmentsTable)
       .values({
         clinicId: session.user.clinic.id,
         patientId: data.patientId,
         doctorId: data.doctorId,
-        date: data.date,
+        appointmentPriceInCents: data.appointmentPriceInCents,
+        date: appointmentDate,
       })
       .returning();
 
+    revalidatePath("/appointments");
     return {
       appointment: appointment[0],
     };
