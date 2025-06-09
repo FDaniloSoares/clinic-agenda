@@ -1,9 +1,18 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+import {
+  PageActions,
+  PageContainer,
+  PageContent,
+  PageDescription,
+  PageHeader,
+  PageHeaderContent,
+  PageTitle,
+} from "@/components/ui/page-container";
 import { auth } from "@/lib/auth";
 
-import SignOutButton from "./_components/sign-out-button";
+import { DatePicker } from "./_components/date-picker";
 
 const DashboardPage = async () => {
   const session = await auth.api.getSession({
@@ -25,12 +34,24 @@ const DashboardPage = async () => {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <h1>Dashboard</h1>
-      <p>{session?.user?.name}</p>
-      <p>{session?.user?.email}</p>
-      <SignOutButton />
-    </div>
+    <PageContainer>
+      <PageHeader>
+        <PageHeaderContent>
+          <PageTitle>Pacientes</PageTitle>
+          <PageDescription>
+            Gerencie os pacientes da sua clínica
+          </PageDescription>
+        </PageHeaderContent>
+
+        <PageActions>
+          <DatePicker />
+        </PageActions>
+      </PageHeader>
+
+      <PageContent>
+        <div>oi</div>
+      </PageContent>
+    </PageContainer>
   );
 };
 
