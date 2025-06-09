@@ -1,8 +1,9 @@
 "use client";
 
-import { addDays, format } from "date-fns";
+import { addMonths, format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Calendar as CalendarIcon } from "lucide-react";
+import { parseAsIsoDate, useQueryState } from "nuqs";
 import React from "react";
 import { DateRange } from "react-day-picker";
 
@@ -18,10 +19,33 @@ import { cn } from "@/lib/utils";
 export function DatePicker({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(2022, 0, 20),
-    to: addDays(new Date(2022, 0, 20), 20),
-  });
+  const [from, setFrom] = useQueryState(
+    "from",
+    parseAsIsoDate.withDefault(new Date()),
+  );
+
+  const [to, setTo] = useQueryState(
+    "to",
+    parseAsIsoDate.withDefault(addMonths(new Date(), 1)),
+  );
+
+  const date = {
+    from,
+    to,
+  };
+
+  const handleDateSelect = (dateRange: DateRange | undefined) => {
+    if (dateRange?.from) {
+      setFrom(dateRange.from, {
+        shallow: false,
+      });
+    }
+    if (dateRange?.to) {
+      setTo(dateRange.to, {
+        shallow: false,
+      });
+    }
+  };
 
   return (
     <div className={cn("grid gap-2", className)}>
@@ -61,7 +85,7 @@ export function DatePicker({
             mode="range"
             defaultMonth={date?.from}
             selected={date}
-            onSelect={setDate}
+            onSelect={handleDateSelect}
             numberOfMonths={2}
             locale={ptBR}
           />
