@@ -77,6 +77,7 @@ export const addAppointment = actionClient
       .returning();
 
     revalidatePath("/appointments");
+    revalidatePath("/dashboard");
     return {
       appointment: appointment[0],
     };
