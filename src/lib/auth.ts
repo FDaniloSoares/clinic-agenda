@@ -13,19 +13,6 @@ export const auth = betterAuth({
     usePlural: true,
     schema,
   }),
-  advanced: {
-    cookies: {
-      session_token: {
-        name: "custom_session_token",
-        attributes: {
-          httpOnly: true,
-          sameSite: "none", // ❗ importante para ambientes seguros
-          path: "/",
-          secure: true,
-        },
-      },
-    },
-  },
   socialProviders: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
