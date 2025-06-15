@@ -14,11 +14,16 @@ export const auth = betterAuth({
     schema,
   }),
   advanced: {
-    defaultCookieAttributes: {
-      secure: true,
-      httpOnly: true,
-      sameSite: "none", // Allows CORS-based cookie sharing across subdomains
-      partitioned: true, // New browser standards will mandate this for foreign cookies
+    cookies: {
+      session_token: {
+        name: "custom_session_token",
+        attributes: {
+          httpOnly: true,
+          sameSite: "none", // ❗ importante para ambientes seguros
+          path: "/",
+          secure: process.env.NODE_ENV === "production",
+        },
+      },
     },
   },
   socialProviders: {
