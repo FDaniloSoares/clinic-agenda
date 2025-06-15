@@ -21,7 +21,7 @@ export const auth = betterAuth({
           httpOnly: true,
           sameSite: "none", // ❗ importante para ambientes seguros
           path: "/",
-          secure: process.env.NODE_ENV === "production",
+          secure: true,
         },
       },
     },
