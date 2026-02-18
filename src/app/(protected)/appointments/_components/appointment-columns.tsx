@@ -3,7 +3,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 
-
 import { appointmentsTable } from "@/db/schema";
 
 import { AppointmentsTableActions } from "./appointment-table-actions";

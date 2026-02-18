@@ -3,8 +3,6 @@
 import "dayjs/locale/pt-br";
 
 import dayjs from "dayjs";
-
-
 import { DollarSign } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
