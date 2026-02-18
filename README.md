@@ -6,6 +6,8 @@ A production-ready SaaS platform for clinic appointment management, built with m
 
 **Live:** [clinic-agenda-20ff3e5802b954de7.vercel.app](https://clinic-agenda-20ff3e5802b954de7.vercel.app)
 
+![Clinic Agenda Dashboard](./assets/print-view.png)
+
 ---
 
 ## Overview
@@ -19,26 +21,31 @@ The subscription model is powered by Stripe, offering recurring monthly billing,
 ## Key Features
 
 ### Clinic Management
+
 - Multi-clinic support with per-clinic data isolation
 - Guided onboarding flow after sign-up (clinic creation step)
 - All data scoped to the authenticated clinic via enriched session context
 
 ### Doctor Management
+
 - Register doctors with specialty, appointment pricing, and weekly availability windows
 - Availability defined by day range and time range (stored in UTC)
 - Intelligent time slot generation (30-min intervals) based on real availability
 
 ### Patient Management
+
 - Full patient registry with contact info and demographics
 - Filterable and sortable data table view
 - Create, update, and delete operations with optimistic feedback
 
 ### Appointment Scheduling
+
 - Book appointments by selecting available time slots per doctor
 - Real-time availability calculation based on existing bookings and doctor schedule
 - Full CRUD with instant UI updates via server-side revalidation
 
 ### Analytics Dashboard
+
 - Revenue tracking (total and daily breakdown)
 - Appointment volume statistics
 - Top doctors and specialties by demand
@@ -47,6 +54,7 @@ The subscription model is powered by Stripe, offering recurring monthly billing,
 - Date range filtering
 
 ### Subscription & Billing (Stripe)
+
 - **Essential Plan** — R$ 59/month
   - Up to 3 doctors
   - Unlimited appointments
@@ -59,6 +67,7 @@ The subscription model is powered by Stripe, offering recurring monthly billing,
 - Plan state persisted in database and reflected in session
 
 ### Authentication
+
 - Email/password sign-up and sign-in
 - Google OAuth (social login)
 - Session enriched with clinic context and plan data
@@ -69,35 +78,38 @@ The subscription model is powered by Stripe, offering recurring monthly billing,
 ## Tech Stack
 
 ### Frontend
-| Tech | Role |
-|---|---|
+
+| Tech                    | Role                                   |
+| ----------------------- | -------------------------------------- |
 | Next.js 15 (App Router) | Framework with React Server Components |
-| React 19 | UI rendering |
-| TypeScript | Type safety end-to-end |
-| Tailwind CSS v4 | Utility-first styling |
-| shadcn/ui + Radix UI | Accessible component primitives |
-| TanStack React Query | Server state and cache management |
-| TanStack React Table | Sortable/filterable data tables |
-| React Hook Form + Zod | Form state and schema validation |
-| Recharts | Data visualization (charts) |
-| Nuqs | URL-driven query state management |
-| Sonner | Toast notification system |
+| React 19                | UI rendering                           |
+| TypeScript              | Type safety end-to-end                 |
+| Tailwind CSS v4         | Utility-first styling                  |
+| shadcn/ui + Radix UI    | Accessible component primitives        |
+| TanStack React Query    | Server state and cache management      |
+| TanStack React Table    | Sortable/filterable data tables        |
+| React Hook Form + Zod   | Form state and schema validation       |
+| Recharts                | Data visualization (charts)            |
+| Nuqs                    | URL-driven query state management      |
+| Sonner                  | Toast notification system              |
 
 ### Backend
-| Tech | Role |
-|---|---|
-| Next.js API Routes | Serverless API layer |
-| next-safe-action | Type-safe server actions with Zod |
-| better-auth | Authentication (email + Google OAuth) |
-| Drizzle ORM | Type-safe PostgreSQL access |
-| Neon (serverless Postgres) | Managed database |
-| Stripe SDK | Subscriptions, checkout, webhooks, portal |
+
+| Tech                       | Role                                      |
+| -------------------------- | ----------------------------------------- |
+| Next.js API Routes         | Serverless API layer                      |
+| next-safe-action           | Type-safe server actions with Zod         |
+| better-auth                | Authentication (email + Google OAuth)     |
+| Drizzle ORM                | Type-safe PostgreSQL access               |
+| Neon (serverless Postgres) | Managed database                          |
+| Stripe SDK                 | Subscriptions, checkout, webhooks, portal |
 
 ### Infrastructure
-| Tech | Role |
-|---|---|
-| Vercel | Deployment and serverless runtime |
-| Neon | Serverless PostgreSQL on AWS (sa-east-1) |
+
+| Tech   | Role                                     |
+| ------ | ---------------------------------------- |
+| Vercel | Deployment and serverless runtime        |
+| Neon   | Serverless PostgreSQL on AWS (sa-east-1) |
 | Stripe | Payment processing and billing lifecycle |
 
 ---
@@ -140,6 +152,7 @@ verifications   → Email verification tokens
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 20+
 - PostgreSQL database (or a [Neon](https://neon.tech) project)
 - Stripe account with a configured product and price
@@ -217,4 +230,4 @@ src/
 
 Built as a fullstack project demonstrating SaaS product architecture — from subscription billing to multi-tenant data isolation, auth session enrichment, and a performance-oriented frontend built on Next.js App Router with React Server Components.
 
-Part of my portfolio of production-driven web applications. More at [github.com/fdaniel](https://github.com/fdanel).
+Part of my portfolio of production-driven web applications. More at [github.com/fdanilosoares](https://github.com/fdanilosoares).
