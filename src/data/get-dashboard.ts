@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { and, count, desc, eq, gte, lte, sql, sum } from "drizzle-orm";
 
 import { db } from "@/db";
@@ -17,9 +16,6 @@ interface Params {
 }
 
 export const getDashboard = async ({ from, to, session }: Params) => {
-  const chartStartDate = dayjs().subtract(10, "days").startOf("day").toDate();
-  const chartEndDate = dayjs().add(10, "days").endOf("day").toDate();
-
   const [
     [totalRevenue],
     [totalAppointments],
@@ -128,27 +124,8 @@ export const getDashboard = async ({ from, to, session }: Params) => {
       .where(
         and(
           eq(appointmentsTable.clinicId, session.user.clinic.id),
-          gte(appointmentsTable.date, chartStartDate),
-          lte(appointmentsTable.date, chartEndDate),
-        ),
-      )
-      .groupBy(sql`DATE(${appointmentsTable.date})`)
-      .orderBy(sql`DATE(${appointmentsTable.date})`),
-    db
-      .select({
-        date: sql<string>`DATE(${appointmentsTable.date})`.as("date"),
-        appointments: count(appointmentsTable.id),
-        revenue:
-          sql<number>`COALESCE(SUM(${appointmentsTable.appointmentPriceInCents}),0)`.as(
-            "revenue",
-          ),
-      })
-      .from(appointmentsTable)
-      .where(
-        and(
-          eq(appointmentsTable.clinicId, session.user.clinic.id),
-          gte(appointmentsTable.updatedAt, chartStartDate),
-          lte(appointmentsTable.date, chartEndDate),
+          gte(appointmentsTable.date, new Date(from)),
+          lte(appointmentsTable.date, new Date(to)),
         ),
       )
       .groupBy(sql`DATE(${appointmentsTable.date})`)
