@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 const clinicFormSchema = z.object({
-  name: z.string().min(1, { message: "Nome é obrigatório" }),
+  name: z.string().min(1, { message: "Name is required" }),
 });
 
 const ClinicForm = () => {
@@ -36,11 +36,11 @@ const ClinicForm = () => {
   const onSubmit = async (values: z.infer<typeof clinicFormSchema>) => {
     try {
       await createClinic(values.name);
-      toast.success("Clínica criada com sucesso");
+      toast.success("Clinic created successfully");
       formClinic.reset();
       router.push("/dashboard");
     } catch {
-      toast.error("Erro ao criar clínica");
+      toast.error("Failed to create clinic");
     }
   };
 
@@ -52,7 +52,7 @@ const ClinicForm = () => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nome</FormLabel>
+              <FormLabel>Name</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -69,7 +69,7 @@ const ClinicForm = () => {
             {formClinic.formState.isSubmitting && (
               <Loader2 className="h-4 w-4 animate-spin" />
             )}
-            Criar clínica
+            Create clinic
           </Button>
         </DialogFooter>
       </form>

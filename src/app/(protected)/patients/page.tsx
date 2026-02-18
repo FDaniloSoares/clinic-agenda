@@ -40,9 +40,9 @@ export default async function PatientsPage() {
     <PageContainer>
       <PageHeader>
         <PageHeaderContent>
-          <PageTitle>Pacientes</PageTitle>
+          <PageTitle>Patients</PageTitle>
           <PageDescription>
-            Gerencie os pacientes da sua clínica
+            Manage your clinic patients
           </PageDescription>
         </PageHeaderContent>
 

@@ -23,22 +23,22 @@ const StatsCards = ({
 }: StatsCardsProps) => {
   const stats = [
     {
-      title: "Faturamento",
+      title: "Revenue",
       value: totalRevenue ? formatCurrencyInBRL(totalRevenue) : "R$ 0,00",
       icon: DollarSignIcon,
     },
     {
-      title: "Agendamentos",
+      title: "Appointments",
       value: totalAppointments.toString(),
       icon: CalendarIcon,
     },
     {
-      title: "Pacientes",
+      title: "Patients",
       value: totalPatients.toString(),
       icon: UserIcon,
     },
     {
-      title: "Médicos",
+      title: "Doctors",
       value: totalDoctors.toString(),
       icon: UsersIcon,
     },

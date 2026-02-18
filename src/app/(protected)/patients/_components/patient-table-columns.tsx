@@ -12,7 +12,7 @@ export const patiensTableColumns: ColumnDef<Patient>[] = [
   {
     id: "name",
     accessorKey: "name",
-    header: "Nome",
+    header: "Name",
   },
   {
     id: "email",
@@ -22,7 +22,7 @@ export const patiensTableColumns: ColumnDef<Patient>[] = [
   {
     id: "phoneNumber",
     accessorKey: "phoneNumber",
-    header: "Telefone",
+    header: "Phone",
     cell: ({ row }) => {
       const phone = row.original.phoneNumber;
       const formatted = phone.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
@@ -32,10 +32,10 @@ export const patiensTableColumns: ColumnDef<Patient>[] = [
   {
     id: "sex",
     accessorKey: "sex",
-    header: "Sexo",
+    header: "Sex",
     cell: ({ row }) => {
       const patient = row.original;
-      return patient.sex === "male" ? "Masculino" : "Feminino";
+      return patient.sex === "male" ? "Male" : "Female";
     },
   },
   {

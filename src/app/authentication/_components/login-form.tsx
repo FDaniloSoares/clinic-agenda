@@ -27,11 +27,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 const loginSchema = z.object({
-  email: z.string().trim().email({ message: "Email inválido" }),
+  email: z.string().trim().email({ message: "Invalid email" }),
   password: z
     .string()
     .trim()
-    .min(8, { message: "Senha deve ter pelo menos 8 caracteres" }),
+    .min(8, { message: "Password must be at least 8 characters" }),
 });
 
 const LoginForm = () => {
@@ -53,11 +53,11 @@ const LoginForm = () => {
       },
       {
         onSuccess: () => {
-          toast.success("Login realizado com sucesso.");
+          toast.success("Login successful.");
           router.push("/dashboard");
         },
         onError: () => {
-          toast.error("Email ou senha inválidos.");
+          toast.error("Invalid email or password.");
         },
       },
     );
@@ -76,7 +76,7 @@ const LoginForm = () => {
         <form onSubmit={loginForm.handleSubmit(onSubmit)} className="space-y-8">
           <CardHeader>
             <CardTitle>Login</CardTitle>
-            <CardDescription>Faça login para continuar</CardDescription>
+            <CardDescription>Sign in to continue</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <FormField
@@ -84,9 +84,9 @@ const LoginForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>E-mail</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Digite seu e-mail" {...field} />
+                    <Input placeholder="Enter your email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -97,10 +97,10 @@ const LoginForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Senha</FormLabel>
+                  <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Digite sua senha"
+                      placeholder="Enter your password"
                       type="password"
                       {...field}
                     />
@@ -120,7 +120,7 @@ const LoginForm = () => {
                 {loginForm.formState.isSubmitting ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 ) : (
-                  "Entrar"
+                  "Sign in"
                 )}
               </Button>
               <Button
@@ -147,7 +147,7 @@ const LoginForm = () => {
                     fill="#EA4335"
                   />
                 </svg>
-                Entrar com Google
+                Sign in with Google
               </Button>
             </div>
           </CardFooter>

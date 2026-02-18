@@ -54,14 +54,14 @@ export default async function AppointmentsPage() {
     <PageContainer>
       <PageHeader>
         <PageHeaderContent>
-          <PageTitle>Agendamentos</PageTitle>
-          <PageDescription>Gerencie os agendamentos da clínica</PageDescription>
+          <PageTitle>Appointments</PageTitle>
+          <PageDescription>Manage clinic appointments</PageDescription>
         </PageHeaderContent>
         <PageActions>
           <AddAppointmentForm doctors={doctors} patients={patients}>
             <Button>
               <Plus className="mr-2 h-4 w-4" />
-              Novo agendamento
+              New appointment
             </Button>
           </AddAppointmentForm>
         </PageActions>

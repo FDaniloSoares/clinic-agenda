@@ -54,7 +54,7 @@ export default function TopSpecialties({
         <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Hospital className="text-muted-foreground" />
-            <CardTitle className="text-base">Especialidades</CardTitle>
+            <CardTitle className="text-base">Specialties</CardTitle>
           </div>
         </div>
 
@@ -62,7 +62,7 @@ export default function TopSpecialties({
         <div className="space-y-6">
           {topSpecialties.map((specialty) => {
             const Icon = getSpecialtyIcon(specialty.specialty);
-            // Porcentagem de ocupação da especialidade baseando-se no maior número de agendamentos
+            // Percentage based on max appointments per specialty
             const progressValue =
               (specialty.appointments / maxAppointments) * 100;
 
@@ -79,7 +79,7 @@ export default function TopSpecialties({
                     <h3 className="text-sm">{specialty.specialty}</h3>
                     <div className="text-right">
                       <span className="text-muted-foreground text-sm font-medium">
-                        {specialty.appointments} agend.
+                        {specialty.appointments} appt.
                       </span>
                     </div>
                   </div>

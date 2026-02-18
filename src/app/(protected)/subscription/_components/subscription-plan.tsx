@@ -42,12 +42,12 @@ export function SubscriptionPlan({
     },
   });
   const features = [
-    "Cadastro de até 3 médicos",
-    "Agendamentos ilimitados",
-    "Métricas básicas",
-    "Cadastro de pacientes",
-    "Confirmação manual",
-    "Suporte via e-mail",
+    "Up to 3 doctors",
+    "Unlimited appointments",
+    "Basic analytics",
+    "Patient records",
+    "Manual confirmation",
+    "Email support",
   ];
 
   const handleSubscribeClick = () => {
@@ -72,11 +72,11 @@ export function SubscriptionPlan({
           )}
         </div>
         <p className="text-gray-600">
-          Para profissionais autônomos ou pequenas clínicas
+          For independent professionals or small clinics
         </p>
         <div className="flex items-baseline">
           <span className="text-3xl font-bold text-gray-900">R$60</span>
-          <span className="ml-1 text-gray-600">/ mês</span>
+          <span className="ml-1 text-gray-600">/ month</span>
         </div>
       </CardHeader>
 
@@ -102,9 +102,9 @@ export function SubscriptionPlan({
             {createStripeCheckoutAction.isExecuting ? (
               <Loader2 className="mr-1 h-4 w-4 animate-spin" />
             ) : active ? (
-              "Gerenciar assinatura"
+              "Manage subscription"
             ) : (
-              "Fazer assinatura"
+              "Subscribe"
             )}
           </Button>
         </div>

@@ -28,8 +28,8 @@ const SubscriptionPage = async () => {
     <PageContainer>
       <PageHeader>
         <PageHeaderContent>
-          <PageTitle>Assinatura</PageTitle>
-          <PageDescription>Gerencie a sua assinatura.</PageDescription>
+          <PageTitle>Subscription</PageTitle>
+          <PageDescription>Manage your subscription.</PageDescription>
         </PageHeaderContent>
       </PageHeader>
       <PageContent>

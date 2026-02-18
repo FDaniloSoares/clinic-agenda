@@ -49,22 +49,22 @@ import { medicalSpecialties } from "../_constants";
 const formSchema = z
   .object({
     name: z.string().trim().min(1, {
-      message: "Nome é obrigatório",
+      message: "Name is required",
     }),
     specialty: z
       .string()
       .trim()
-      .min(1, { message: "Especialidade é obrigatória" }),
+      .min(1, { message: "Specialty is required" }),
     appointmentPrice: z.number().min(1, {
-      message: "Preço da consulta é obrigatório",
+      message: "Appointment price is required",
     }),
     availableFromWeekDay: z.string(),
     availableToWeekDay: z.string(),
     availableFromTime: z.string().min(1, {
-      message: "Hora de início é obrigatório",
+      message: "Start time is required",
     }),
     availableToTime: z.string().min(1, {
-      message: "Hora de término é obrigatório",
+      message: "End time is required",
     }),
   })
   .refine(
@@ -75,7 +75,7 @@ const formSchema = z
       return false;
     },
     {
-      message: "O horário final deve ser posterior ao horário de início",
+      message: "End time must be after start time",
       path: ["availableToTime"],
     },
   );
@@ -109,21 +109,21 @@ const UpsertDoctorForm = ({
 
   const upsertDoctorAction = useAction(upsertDoctor, {
     onSuccess: () => {
-      toast.success("Médico adicionado com sucesso");
+      toast.success("Doctor added successfully");
       onSuccess?.();
     },
     onError: () => {
-      toast.error("Erro ao adicionar médico");
+      toast.error("Failed to add doctor");
     },
   });
 
   const deleteDoctorAction = useAction(deleteDoctor, {
     onSuccess: () => {
-      toast.success("Médico deletado com sucesso");
+      toast.success("Doctor deleted successfully");
       onSuccess?.();
     },
     onError: () => {
-      toast.error("Erro ao deletar médico");
+      toast.error("Failed to delete doctor");
     },
   });
 
@@ -167,11 +167,11 @@ const UpsertDoctorForm = ({
   return (
     <DialogContent className="max-h-dvh overflow-y-auto">
       <DialogHeader>
-        <DialogTitle>{doctor ? doctor?.name : "Adicionar médico"}</DialogTitle>
+        <DialogTitle>{doctor ? doctor?.name : "Add doctor"}</DialogTitle>
         <DialogDescription>
           {doctor
-            ? "Edite as informações desse médico"
-            : "Adicione um novo médico"}
+            ? "Edit doctor information"
+            : "Add a new doctor"}
         </DialogDescription>
       </DialogHeader>
       <Form {...form}>
@@ -181,7 +181,7 @@ const UpsertDoctorForm = ({
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nome</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -194,14 +194,14 @@ const UpsertDoctorForm = ({
             name="specialty"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Especialidade</FormLabel>
+                <FormLabel>Specialty</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <FormControl>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Selecione uma especialidade" />
+                      <SelectValue placeholder="Select a specialty" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -221,7 +221,7 @@ const UpsertDoctorForm = ({
             name="appointmentPrice"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Preço da consulta</FormLabel>
+                <FormLabel>Appointment price</FormLabel>
                 <NumericFormat
                   value={field.value}
                   onValueChange={(value) => {
@@ -245,24 +245,24 @@ const UpsertDoctorForm = ({
             name="availableFromWeekDay"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Dia inicial de disponibilidade</FormLabel>
+                <FormLabel>Availability start day</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <FormControl>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Selecione um dia" />
+                      <SelectValue placeholder="Select a day" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="0">Domingo</SelectItem>
-                    <SelectItem value="1">Segunda</SelectItem>
-                    <SelectItem value="2">Terça</SelectItem>
-                    <SelectItem value="3">Quarta</SelectItem>
-                    <SelectItem value="4">Quinta</SelectItem>
-                    <SelectItem value="5">Sexta</SelectItem>
-                    <SelectItem value="6">Sábado</SelectItem>
+                    <SelectItem value="0">Sunday</SelectItem>
+                    <SelectItem value="1">Monday</SelectItem>
+                    <SelectItem value="2">Tuesday</SelectItem>
+                    <SelectItem value="3">Wednesday</SelectItem>
+                    <SelectItem value="4">Thursday</SelectItem>
+                    <SelectItem value="5">Friday</SelectItem>
+                    <SelectItem value="6">Saturday</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -274,24 +274,24 @@ const UpsertDoctorForm = ({
             name="availableToWeekDay"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Dia final de disponibilidade</FormLabel>
+                <FormLabel>Availability end day</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <FormControl>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Selecione um dia" />
+                      <SelectValue placeholder="Select a day" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="0">Domingo</SelectItem>
-                    <SelectItem value="1">Segunda</SelectItem>
-                    <SelectItem value="2">Terça</SelectItem>
-                    <SelectItem value="3">Quarta</SelectItem>
-                    <SelectItem value="4">Quinta</SelectItem>
-                    <SelectItem value="5">Sexta</SelectItem>
-                    <SelectItem value="6">Sábado</SelectItem>
+                    <SelectItem value="0">Sunday</SelectItem>
+                    <SelectItem value="1">Monday</SelectItem>
+                    <SelectItem value="2">Tuesday</SelectItem>
+                    <SelectItem value="3">Wednesday</SelectItem>
+                    <SelectItem value="4">Thursday</SelectItem>
+                    <SelectItem value="5">Friday</SelectItem>
+                    <SelectItem value="6">Saturday</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -303,19 +303,19 @@ const UpsertDoctorForm = ({
             name="availableFromTime"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Horário inicial de disponibilidade</FormLabel>
+                <FormLabel>Availability start time</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <FormControl>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Selecione um horário" />
+                      <SelectValue placeholder="Select a time" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectLabel>Manhã</SelectLabel>
+                      <SelectLabel>Morning</SelectLabel>
                       <SelectItem value="05:00:00">05:00</SelectItem>
                       <SelectItem value="05:30:00">05:30</SelectItem>
                       <SelectItem value="06:00:00">06:00</SelectItem>
@@ -334,7 +334,7 @@ const UpsertDoctorForm = ({
                       <SelectItem value="12:30:00">12:30</SelectItem>
                     </SelectGroup>
                     <SelectGroup>
-                      <SelectLabel>Tarde</SelectLabel>
+                      <SelectLabel>Afternoon</SelectLabel>
                       <SelectItem value="13:00:00">13:00</SelectItem>
                       <SelectItem value="13:30:00">13:30</SelectItem>
                       <SelectItem value="14:00:00">14:00</SelectItem>
@@ -349,7 +349,7 @@ const UpsertDoctorForm = ({
                       <SelectItem value="18:30:00">18:30</SelectItem>
                     </SelectGroup>
                     <SelectGroup>
-                      <SelectLabel>Noite</SelectLabel>
+                      <SelectLabel>Evening</SelectLabel>
                       <SelectItem value="19:00:00">19:00</SelectItem>
                       <SelectItem value="19:30:00">19:30</SelectItem>
                       <SelectItem value="20:00:00">20:00</SelectItem>
@@ -372,19 +372,19 @@ const UpsertDoctorForm = ({
             name="availableToTime"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Horário final de disponibilidade</FormLabel>
+                <FormLabel>Availability end time</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <FormControl>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Selecione um horário" />
+                      <SelectValue placeholder="Select a time" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectLabel>Manhã</SelectLabel>
+                      <SelectLabel>Morning</SelectLabel>
                       <SelectItem value="05:00:00">05:00</SelectItem>
                       <SelectItem value="05:30:00">05:30</SelectItem>
                       <SelectItem value="06:00:00">06:00</SelectItem>
@@ -403,7 +403,7 @@ const UpsertDoctorForm = ({
                       <SelectItem value="12:30:00">12:30</SelectItem>
                     </SelectGroup>
                     <SelectGroup>
-                      <SelectLabel>Tarde</SelectLabel>
+                      <SelectLabel>Afternoon</SelectLabel>
                       <SelectItem value="13:00:00">13:00</SelectItem>
                       <SelectItem value="13:30:00">13:30</SelectItem>
                       <SelectItem value="14:00:00">14:00</SelectItem>
@@ -418,7 +418,7 @@ const UpsertDoctorForm = ({
                       <SelectItem value="18:30:00">18:30</SelectItem>
                     </SelectGroup>
                     <SelectGroup>
-                      <SelectLabel>Noite</SelectLabel>
+                      <SelectLabel>Evening</SelectLabel>
                       <SelectItem value="19:00:00">19:00</SelectItem>
                       <SelectItem value="19:30:00">19:30</SelectItem>
                       <SelectItem value="20:00:00">20:00</SelectItem>
@@ -442,13 +442,13 @@ const UpsertDoctorForm = ({
                 <AlertDialogTrigger asChild>
                   <Button variant="destructive" className="min-w-32">
                     <TrashIcon />
-                    Deletar
+                    Delete
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>
-                      Tem certeza que deseja deletar esse médico?
+                      Are you sure you want to delete this doctor?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
                       Essa ação não pode ser revertida. Isso irá deletar o
@@ -456,9 +456,9 @@ const UpsertDoctorForm = ({
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
-                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
                     <AlertDialogAction onClick={handleDeleteDoctorClick}>
-                      Deletar
+                      Delete
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
@@ -475,8 +475,8 @@ const UpsertDoctorForm = ({
               {!upsertDoctorAction?.isPending && <SaveIcon />}
               {upsertDoctorAction?.isPending
                 ? doctor
-                  ? "Salvando..."
-                  : "Adicionando..."
+                  ? "Saving..."
+                  : "Adding..."
                 : doctor
                   ? "Salvar"
                   : "Adicionar"}

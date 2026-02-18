@@ -84,7 +84,7 @@ const DashboardPage = async ({ searchParams }: DashboardPageProps) => {
         <PageHeaderContent>
           <PageTitle>Dashboard</PageTitle>
           <PageDescription>
-            Tenha uma visão geral da sua clínica.
+            Get an overview of your clinic.
           </PageDescription>
         </PageHeaderContent>
 
@@ -110,7 +110,7 @@ const DashboardPage = async ({ searchParams }: DashboardPageProps) => {
               <div className="flex items-center gap-4">
                 <Calendar className="text-muted-foreground" />
                 <CardTitle className="text-base">
-                  Agendamentos de hoje
+                  Today's appointments
                 </CardTitle>
               </div>
             </CardHeader>

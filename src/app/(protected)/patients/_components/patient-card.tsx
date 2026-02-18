@@ -42,10 +42,10 @@ const PatientCard = ({ patient }: PatientCardProps) => {
             <h3 className="text-sm font-medium">{patient.name}</h3>
             <p className="text-muted-foreground text-sm">
               {patient.sex === "male"
-                ? "Masculino"
+                ? "Male"
                 : patient.sex === "female"
-                  ? "Feminino"
-                  : "Outro"}
+                  ? "Female"
+                  : "Other"}
             </p>
           </div>
         </div>
@@ -68,7 +68,7 @@ const PatientCard = ({ patient }: PatientCardProps) => {
           onOpenChange={setIsUpsertPatientFormOpen}
         >
           <DialogTrigger asChild>
-            <Button className="w-full">Ver detalhes</Button>
+            <Button className="w-full">View details</Button>
           </DialogTrigger>
           <DialogContent>
             <UpsertPatientForm

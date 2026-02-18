@@ -52,12 +52,12 @@ export function UpsertPatientForm({ isOpen, onSuccess, defaultValues }: Props) {
 
   const { execute, status } = useAction(upsertPatient, {
     onSuccess: () => {
-      toast.success("Paciente salvo com sucesso");
+      toast.success("Patient saved successfully");
       onSuccess?.();
     },
     onError: (error) => {
       toast.error(
-        (error.error.serverError as string) || "Erro ao salvar paciente",
+        (error.error.serverError as string) || "Failed to save patient",
       );
     },
   });
@@ -77,12 +77,12 @@ export function UpsertPatientForm({ isOpen, onSuccess, defaultValues }: Props) {
     <>
       <DialogHeader>
         <DialogTitle>
-          {defaultValues ? defaultValues?.name : "Adicionar paciente"}
+          {defaultValues ? defaultValues?.name : "Add patient"}
         </DialogTitle>
         <DialogDescription>
           {defaultValues
-            ? "Edite os dados do paciente"
-            : "Preencha os dados do paciente"}
+            ? "Edit patient details"
+            : "Fill in patient details"}
         </DialogDescription>
       </DialogHeader>
 
@@ -93,9 +93,9 @@ export function UpsertPatientForm({ isOpen, onSuccess, defaultValues }: Props) {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nome</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Nome do paciente" {...field} />
+                  <Input placeholder="Patient name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -111,7 +111,7 @@ export function UpsertPatientForm({ isOpen, onSuccess, defaultValues }: Props) {
                 <FormControl>
                   <Input
                     type="email"
-                    placeholder="Email do paciente"
+                    placeholder="Patient email"
                     {...field}
                   />
                 </FormControl>
@@ -125,7 +125,7 @@ export function UpsertPatientForm({ isOpen, onSuccess, defaultValues }: Props) {
             name="phoneNumber"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Telefone</FormLabel>
+                <FormLabel>Phone</FormLabel>
                 <FormControl>
                   <PatternFormat
                     format="(##) #####-####"
@@ -145,20 +145,20 @@ export function UpsertPatientForm({ isOpen, onSuccess, defaultValues }: Props) {
             name="sex"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Sexo</FormLabel>
+                <FormLabel>Sex</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Selecione o sexo" />
+                      <SelectValue placeholder="Select sex" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="male">Masculino</SelectItem>
-                    <SelectItem value="female">Feminino</SelectItem>
-                    <SelectItem value="other">Outro</SelectItem>
+                    <SelectItem value="male">Male</SelectItem>
+                    <SelectItem value="female">Female</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />

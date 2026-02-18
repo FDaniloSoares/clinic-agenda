@@ -44,11 +44,11 @@ export const PatientsTableActions = ({ patient }: { patient: Patient }) => {
       if (result.error) {
         toast.error(result.error);
       } else {
-        toast.success("Paciente excluído com sucesso!");
+        toast.success("Patient deleted successfully!");
         setDeleteDialogIsOpen(false);
       }
     } catch {
-      toast.error("Erro ao excluir paciente.");
+      toast.error("Failed to delete patient.");
     } finally {
       setIsDeleting(false);
     }
@@ -67,7 +67,7 @@ export const PatientsTableActions = ({ patient }: { patient: Patient }) => {
             <DropdownMenuLabel>{patient?.name}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => setUpsertDialogIsOpen(true)}>
-              <EditIcon className="mr-2 h-4 w-4" /> Editar
+              <EditIcon className="mr-2 h-4 w-4" /> Edit
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setDeleteDialogIsOpen(true)}>
               <TrashIcon className="mr-2 h-4 w-4" /> Excluir
@@ -89,16 +89,16 @@ export const PatientsTableActions = ({ patient }: { patient: Patient }) => {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Excluir paciente</AlertDialogTitle>
+            <AlertDialogTitle>Delete patient</AlertDialogTitle>
             <AlertDialogDescription>
-              Tem certeza que deseja excluir o paciente {patient.name}? Esta
+              Are you sure you want to delete the patient {patient.name}? Esta
               ação não pode ser desfeita.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction onClick={handleDelete} disabled={isDeleting}>
-              {isDeleting ? "Excluindo..." : "Excluir"}
+              {isDeleting ? "Deleting..." : "Delete"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

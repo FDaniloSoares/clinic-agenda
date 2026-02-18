@@ -4,7 +4,7 @@ import "dayjs/locale/pt-br";
 
 import dayjs from "dayjs";
 
-dayjs.locale("pt-br");
+
 import { DollarSign } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
@@ -30,7 +30,7 @@ interface AppointmentsChartProps {
 const AppointmentsChart = ({
   dailyAppointmentsData,
 }: AppointmentsChartProps) => {
-  // Gerar 21 dias: 10 antes + hoje + 10 depois
+  // Generate 21 days: 10 before + today + 10 after
   const chartDays = Array.from({ length: 21 }).map((_, i) =>
     dayjs()
       .subtract(10 - i, "days")
@@ -40,7 +40,7 @@ const AppointmentsChart = ({
   const chartData = chartDays.map((date) => {
     const dataForDay = dailyAppointmentsData.find((item) => item.date === date);
     return {
-      date: dayjs(date).format("DD/MM"),
+      date: dayjs(date).format("MM/DD"),
       fullDate: date,
       appointments: dataForDay?.appointments || 0,
       revenue: Number(dataForDay?.revenue || 0),
@@ -49,11 +49,11 @@ const AppointmentsChart = ({
 
   const chartConfig = {
     appointments: {
-      label: "Agendamentos",
+      label: "Appointments",
       color: "#0B68F7",
     },
     revenue: {
-      label: "Faturamento",
+      label: "Revenue",
       color: "#10B981",
     },
   } satisfies ChartConfig;
@@ -62,7 +62,7 @@ const AppointmentsChart = ({
     <Card>
       <CardHeader className="flex flex-row items-center gap-2">
         <DollarSign />
-        <CardTitle>Agendamentos e Faturamento</CardTitle>
+        <CardTitle>Appointments & Revenue</CardTitle>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="min-h-[200px]">
@@ -101,7 +101,7 @@ const AppointmentsChart = ({
                         <>
                           <div className="h-3 w-3 rounded bg-[#10B981]" />
                           <span className="text-muted-foreground">
-                            Faturamento:
+                            Revenue:
                           </span>
                           <span className="font-semibold">
                             {formatCurrencyInBRL(Number(value))}
@@ -113,7 +113,7 @@ const AppointmentsChart = ({
                       <>
                         <div className="h-3 w-3 rounded bg-[#0B68F7]" />
                         <span className="text-muted-foreground">
-                          Agendamentos:
+                          Appointments:
                         </span>
                         <span className="font-semibold">{value}</span>
                       </>
@@ -122,7 +122,7 @@ const AppointmentsChart = ({
                   labelFormatter={(label, payload) => {
                     if (payload && payload[0]) {
                       return dayjs(payload[0].payload?.fullDate).format(
-                        "DD/MM/YYYY (dddd)",
+                        "MM/DD/YYYY (dddd)",
                       );
                     }
                     return label;

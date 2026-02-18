@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
+
 import dayjs from "dayjs";
 import { CalendarIcon } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
@@ -49,19 +49,19 @@ import { doctorsTable, pacientsTable } from "@/db/schema";
 
 const formSchema = z.object({
   patientId: z.string({
-    required_error: "Selecione um paciente",
+    required_error: "Select a patient",
   }),
   doctorId: z.string({
-    required_error: "Selecione um médico",
+    required_error: "Select a doctor",
   }),
   appointmentPriceInCents: z.number({
-    required_error: "Informe o valor da consulta",
+    required_error: "Enter appointment price",
   }),
   date: z.date({
-    required_error: "Selecione uma data",
+    required_error: "Select a date",
   }),
   horario: z.string({
-    required_error: "Selecione um horário",
+    required_error: "Select a time",
   }),
 });
 
@@ -87,12 +87,12 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
 
   const { execute, status } = useAction(addAppointment, {
     onSuccess: () => {
-      toast.success("Agendamento criado com sucesso");
+      toast.success("Appointment created successfully");
       setOpen(false);
       form.reset();
     },
     onError: (error) => {
-      toast.error(error?.error?.serverError || "Erro ao criar agendamento");
+      toast.error(error?.error?.serverError || "Failed to create appointment");
     },
   });
 
@@ -146,7 +146,7 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Novo Agendamento</DialogTitle>
+          <DialogTitle>New Appointment</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
@@ -159,14 +159,14 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
               name="patientId"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Paciente</FormLabel>
+                  <FormLabel>Patient</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Selecione um paciente" />
+                        <SelectValue placeholder="Select a patient" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -187,14 +187,14 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
               name="doctorId"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Médico</FormLabel>
+                  <FormLabel>Doctor</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Selecione um médico" />
+                        <SelectValue placeholder="Select a doctor" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -215,7 +215,7 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
               name="appointmentPriceInCents"
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Valor da consulta</FormLabel>
+                  <FormLabel>Appointment price</FormLabel>
                   <FormControl>
                     <NumericFormat
                       customInput={Input}
@@ -247,7 +247,7 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
               name="date"
               render={({ field }) => (
                 <FormItem className="flex w-full flex-col items-start justify-items-start">
-                  <FormLabel>Data</FormLabel>
+                  <FormLabel>Date</FormLabel>
                   <Popover
                     open={datePickerOpen}
                     onOpenChange={setDatePickerOpen}
@@ -268,9 +268,9 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
                         >
                           <CalendarIcon className="mr-2 h-4 w-4" />
                           {field.value ? (
-                            format(field.value, "PPP", { locale: ptBR })
+                            format(field.value, "PPP")
                           ) : (
-                            <span>Selecione uma data</span>
+                            <span>Select a date</span>
                           )}
                         </Button>
                       </FormControl>
@@ -286,7 +286,7 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
                         disabled={(date) =>
                           date < new Date() || !isDateAvalable(date)
                         }
-                        locale={ptBR}
+                        
                         initialFocus
                       />
                     </PopoverContent>
@@ -301,7 +301,7 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
               name="horario"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Horário</FormLabel>
+                  <FormLabel>Time</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -309,7 +309,7 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
                   >
                     <FormControl>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Selecione um horário" />
+                        <SelectValue placeholder="Select a time" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -320,7 +320,7 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
                           disabled={!time?.isAvailable}
                         >
                           {time.value.split(":")[0]}:{time.value.split(":")[1]}
-                          {!time?.isAvailable && " Indisponível"}
+                          {!time?.isAvailable && " Unavailable"}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -339,7 +339,7 @@ export function AddAppointmentForm({ doctors, patients, children }: Props) {
                 Cancelar
               </Button>
               <Button type="submit" disabled={status === "executing"}>
-                {status === "executing" ? "Criando..." : "Criar Agendamento"}
+                {status === "executing" ? "Creating..." : "Create Appointment"}
               </Button>
             </div>
           </form>

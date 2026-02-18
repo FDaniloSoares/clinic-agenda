@@ -41,10 +41,10 @@ export const AppointmentsTableActions = ({
       setIsDeleting(true);
       await deleteAppointment({ id: appointment.id });
 
-      toast.success("Agendamento excluído com sucesso!");
+      toast.success("Appointment deleted successfully!");
       setDeleteDialogIsOpen(false);
     } catch {
-      toast.error("Erro ao excluir agendamento.");
+      toast.error("Failed to delete appointment.");
     } finally {
       setIsDeleting(false);
     }
@@ -59,7 +59,7 @@ export const AppointmentsTableActions = ({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuLabel>Ações</DropdownMenuLabel>
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => setDeleteDialogIsOpen(true)}>
             <TrashIcon className="mr-2 h-4 w-4" /> Excluir
@@ -73,16 +73,16 @@ export const AppointmentsTableActions = ({
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Excluir agendamento</AlertDialogTitle>
+            <AlertDialogTitle>Delete appointment</AlertDialogTitle>
             <AlertDialogDescription>
               Tem certeza que deseja excluir este agendamento? Esta ação não
               pode ser desfeita.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction onClick={handleDelete} disabled={isDeleting}>
-              {isDeleting ? "Excluindo..." : "Excluir"}
+              {isDeleting ? "Deleting..." : "Delete"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

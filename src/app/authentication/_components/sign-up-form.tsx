@@ -28,12 +28,12 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 
 const registerSchema = z.object({
-  name: z.string().trim().min(1, { message: "Nome é obrigatório" }),
-  email: z.string().trim().email({ message: "Email inválido" }),
+  name: z.string().trim().min(1, { message: "Name is required" }),
+  email: z.string().trim().email({ message: "Invalid email" }),
   password: z
     .string()
     .trim()
-    .min(8, { message: "Senha deve ter pelo menos 8 caracteres" }),
+    .min(8, { message: "Password must be at least 8 characters" }),
 });
 
 const SignUpForm = () => {
@@ -61,9 +61,9 @@ const SignUpForm = () => {
         },
         onError: (ctx) => {
           if (ctx.error.code === "USER_ALREADY_EXISTS") {
-            toast.error("E-mail já cadastrado.");
+            toast.error("Email already registered.");
           } else {
-            toast.error("Erro ao criar conta.");
+            toast.error("Failed to create account.");
           }
         },
       },
@@ -78,8 +78,8 @@ const SignUpForm = () => {
           className="space-y-8"
         >
           <CardHeader>
-            <CardTitle>Criar conta</CardTitle>
-            <CardDescription>Crie sua conta para continuar</CardDescription>
+            <CardTitle>Create account</CardTitle>
+            <CardDescription>Create your account to continue</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <FormField
@@ -87,9 +87,9 @@ const SignUpForm = () => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nome</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Digite seu nome" {...field} />
+                    <Input placeholder="Enter your name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -100,9 +100,9 @@ const SignUpForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>E-mail</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Digite seu e-mail" {...field} />
+                    <Input placeholder="Enter your email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -113,10 +113,10 @@ const SignUpForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Senha</FormLabel>
+                  <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Digite sua senha"
+                      placeholder="Enter your password"
                       type="password"
                       {...field}
                     />
@@ -135,7 +135,7 @@ const SignUpForm = () => {
               {registerForm.formState.isSubmitting ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : (
-                "Criar conta"
+                "Create account"
               )}
             </Button>
           </CardFooter>

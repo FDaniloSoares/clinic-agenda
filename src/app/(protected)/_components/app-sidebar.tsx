@@ -41,17 +41,17 @@ const items = [
     icon: LayoutDashboard,
   },
   {
-    title: "Agendamentos",
+    title: "Appointments",
     url: "/appointments",
     icon: CalendarDays,
   },
   {
-    title: "Médicos",
+    title: "Doctors",
     url: "/doctors",
     icon: Stethoscope,
   },
   {
-    title: "Pacientes",
+    title: "Patients",
     url: "/patients",
     icon: UsersRound,
   },
@@ -79,7 +79,7 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Menu Principal</SidebarGroupLabel>
+          <SidebarGroupLabel>Main Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
@@ -96,7 +96,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
-          <SidebarGroupLabel>Outros</SidebarGroupLabel>
+          <SidebarGroupLabel>Other</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
@@ -106,7 +106,7 @@ export function AppSidebar() {
                 >
                   <Link href="/subscription">
                     <Gem />
-                    <span>Assinatura</span>
+                    <span>Subscription</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -136,7 +136,7 @@ export function AppSidebar() {
               <DropdownMenuContent>
                 <DropdownMenuItem onClick={handleSignOut}>
                   <LogOut />
-                  Sair
+                  Sign out
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

@@ -39,9 +39,9 @@ const DoctorsPage = async () => {
     <PageContainer>
       <PageHeader>
         <PageHeaderContent>
-          <PageTitle>Médicos</PageTitle>
+          <PageTitle>Doctors</PageTitle>
           <PageDescription>
-            Gerencie os médicos cadastrados no sistema.
+            Manage the doctors registered in the system.
           </PageDescription>
         </PageHeaderContent>
         <PageActions>

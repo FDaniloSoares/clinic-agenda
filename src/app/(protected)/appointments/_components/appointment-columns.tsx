@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
+
 
 import { appointmentsTable } from "@/db/schema";
 
@@ -17,26 +17,26 @@ export const appointmentsTableColumns: ColumnDef<Appointment>[] = [
   {
     id: "patient",
     accessorKey: "patient.name",
-    header: "Paciente",
+    header: "Patient",
   },
   {
     id: "doctor",
     accessorKey: "doctor.name",
-    header: "Médico",
+    header: "Doctor",
   },
   {
     id: "date",
     accessorKey: "date",
-    header: "Data",
+    header: "Date",
     cell: ({ row }) => {
       const date = row.original.date;
-      return format(date, "PPP", { locale: ptBR });
+      return format(date, "PPP");
     },
   },
   {
     id: "time",
     accessorKey: "date",
-    header: "Horário",
+    header: "Time",
     cell: ({ row }) => {
       const date = row.original.date;
       return format(date, "HH:mm");
@@ -45,15 +45,15 @@ export const appointmentsTableColumns: ColumnDef<Appointment>[] = [
   {
     id: "speciality",
     accessorKey: "doctor.speciality",
-    header: "Especialidade",
+    header: "Specialty",
   },
   {
     id: "price",
     accessorKey: "appointmentPriceInCents",
-    header: "Valor",
+    header: "Price",
     cell: ({ row }) => {
       const price = row.original.appointmentPriceInCents;
-      return new Intl.NumberFormat("pt-BR", {
+      return new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "BRL",
       }).format(price / 100);

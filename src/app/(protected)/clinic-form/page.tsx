@@ -13,9 +13,9 @@ const ClinicFormPage = () => {
     <Dialog open={true}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Adiconar Clínica</DialogTitle>
+          <DialogTitle>Add Clinic</DialogTitle>
           <DialogDescription>
-            Adicione uma clínica continua para continuar.
+            Add a clinic to continue.
           </DialogDescription>
         </DialogHeader>
         <ClinicForm />
